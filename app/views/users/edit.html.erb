@@ -1,0 +1,15 @@
+<h1>プロフィール編集</h1>
+
+<%= form_with(model: @user, local: true) do |f| %>
+  <p><%= @user.name %></p>
+  <P><%= @user.email %></p>
+  <p><%= f.label :プロフィール %></p>
+  <p><%= f.text_field :profile %></p>
+  <p><%= f.label :アイコン画像 %>:<%= image_tag(@user.photo.url(:thumb)) %></p>
+  <p><%= f.file_field :photo, id: :user_photo %></p>
+  <p><%= f.label :パスワード %></p>
+  <p><%= f.password_field :password %></p>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <p><%= f.submit "編集", class: "btn btn-warning btn-lg" %></p>
+<% end %>

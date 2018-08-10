@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+  before_action :login_check, only: [:new, :edit, :show, :destroy]
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,6 +7,7 @@ class PicturesController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def new
@@ -21,6 +23,7 @@ class PicturesController < ApplicationController
 
   def create
     @picture = Picture.new(picture_params)
+    @picture.user_id = current_user.id
 
     respond_to do |format|
       if @picture.save
@@ -52,6 +55,13 @@ class PicturesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def login_check
+    if logged_in?
+    else redirect_to new_session_path
+    end
+  end
+
 
   private
     def set_picture
