@@ -6,7 +6,7 @@
   <p><%= f.label :プロフィール %></p>
   <p><%= f.text_field :profile %></p>
   <p><%= f.label :アイコン画像 %>:<%= image_tag(@user.image.url(:thumb)) %></p>
-  <p><%= f.file_field :photo, id: :user_photo %></p>
+  <p><%= f.file_field :image, id: :user_image %></p>
   <p><%= f.label :パスワード %></p>
   <p><%= f.password_field :password %></p>
   <%= f.hidden_field :name %>
